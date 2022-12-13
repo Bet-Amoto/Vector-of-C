@@ -29,4 +29,3 @@ void revears(void* vec){
         swap(((char*)vec)+i*n,((char*)vec)+(vector_size(vec)-i-1)*n,n);
     }
 }
-
