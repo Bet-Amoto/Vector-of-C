@@ -18,14 +18,15 @@ vector(void) _vector_init(size_t type,size_t size){
 }
 
 //動的配列を関数に従ってソートする
-void sort(vector(void) vec,int (*comp)(const void*,const void*)){
+void vector_sort(vector(void) vec,int (*comp)(const void*,const void*)){
     qsort(vec,vector_size(vec),vector_type(vec),comp);
 }
 
 //動的配列の中身の順番をひっくり返す
-void revears(void* vec){
+void vector_revears(void* vec){
     size_t n = vector_type(vec);
     for(int i=0;i<vector_size(vec)/2;i++){
         swap(((char*)vec)+i*n,((char*)vec)+(vector_size(vec)-i-1)*n,n);
     }
 }
+

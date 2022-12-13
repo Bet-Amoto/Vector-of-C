@@ -1,14 +1,7 @@
 #include <stdio.h>
-#include <stdlib.h>
-#include <assert.h>
-#include <string.h>
 #include "Vector.h"
 
-typedef struct{
-    int x;
-    int y;
-}Vec2;
-
+//動的配列の中身を表示する関数
 void PrintIntVector(vector(int) vec){
     printf("[");
     for(int i=0;i<vector_size(vec);i++){
@@ -23,14 +16,10 @@ int compareInt(const void* a,const void* b){
     return *(int*)a - *(int*)b;
 }
 
-//ソート用の比較関数
-int compareVec2(const void* a,const void* b){
-    return ((Vec2*)a)->x - ((Vec2*)b)->x;
-}
-
 int main(){
     //動的配列の初期化
     vector(int) x = vector_init(int,5);
+    PrintIntVector(x);
     for(int i = 0; i<vector_size(x);i++){
         x[i] = i;
     }
@@ -44,12 +33,12 @@ int main(){
     // [0, 1, 2, 50, 3, 4, 100]
 
     //ソート
-    sort(x,compareInt);
+    vector_sort(x,compareInt);
     PrintIntVector(x);
     // [0, 1, 2, 3, 4, 50, 100]
 
     //反転
-    revears(x);
+    vector_revears(x);
     PrintIntVector(x);
     // [100, 50, 4, 3, 2, 1, 0]
 

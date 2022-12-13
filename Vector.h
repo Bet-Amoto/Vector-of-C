@@ -66,5 +66,9 @@
 #define vector_free(vec) do{void* TmpVector = (void*)&((size_t*)vec)[-3];free(TmpVector);vec=NULL;}while(0)
 
 vector(void) _vector_init(size_t type,size_t size);
-void sort(vector(void) vec,int (*comp)(const void*,const void*));
-void revears(vector(void) vec);
+
+//ソートする
+void vector_sort(vector(void) vec,int (*comp)(const void*,const void*));
+
+//逆順にする
+void vector_revears(vector(void) vec);
