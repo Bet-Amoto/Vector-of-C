@@ -19,7 +19,6 @@ int compareInt(const void* a,const void* b){
 int main(){
     //動的配列の初期化
     vector(int) x = vector_init(int,5);
-    PrintIntVector(x);
     for(int i = 0; i<vector_size(x);i++){
         x[i] = i;
     }
@@ -45,11 +44,12 @@ int main(){
     //一番後ろの値の削除
     vector_popback(x);
     PrintIntVector(x);
+    // [100, 50, 4, 3, 2, 1]
 
     //2番目の値の削除
     vector_erace(x,2);
     PrintIntVector(x);
-    // [100, 50, 4, 3, 1, 0]
+    // [100, 50, 3, 2, 1]
 
     //動的配列のメモリの解放
     vector_free(x);
