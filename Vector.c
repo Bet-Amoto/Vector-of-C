@@ -12,7 +12,7 @@ static void swap(void* a,void* b,size_t siz){
     free(TmpAddr);
 }
 //動的配列の初期化
-vector(void) _vector_init(size_t type,size_t size){
+vector(void) vector_init_func(size_t type,size_t size){
     vector(void) TmpVector = malloc(type*size + sizeof(size_t)*3);
     if(TmpVector == NULL){
         printf("Error: Memory allocation failed.(vector.c _vector_init)\n");

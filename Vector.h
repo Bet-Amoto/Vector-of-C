@@ -1,14 +1,13 @@
 #pragma once
 #include <stdio.h>
 #include <stdlib.h>
-#include <assert.h>
 #include <string.h>
 
 //動的配列の宣言
 #define vector(T) T*
 
 //動的配列の初期化
-#define vector_init(T,size) (T*)_vector_init(sizeof(T),size)
+#define vector_init(T,siz) (T*)vector_init_func(sizeof(T),siz)
 
 //動的配列に保存された情報を見る
 #define vector_capacity(vec) ((const size_t*)((void*)(vec)))[-1]
@@ -39,10 +38,10 @@
 #define vector_push_back(vec,val) do{                                                                           \
     if(vector_capacity(vec) <= vector_size(vec)){                                                               \
         void* TmpVector = (void*)&((size_t*)vec)[-3];                                                           \
-        void* NewAddr = realloc(TmpVector,(vector_size(vec)+1)*vector_type(vec) + sizeof(size_t)*3);            \
+        void* NewAddr = realloc(TmpVector,(max(vector_size(vec)*2,1))*vector_type(vec) + sizeof(size_t)*3);     \
         if(NewAddr == NULL){printf("Error: Memory allocation failed.(vector.h vector_pudh_back)\n"); exit(1);}  \
         if(TmpVector != NewAddr){TmpVector = NewAddr; vec=(void*)&(((size_t*)TmpVector)[3]);}                   \
-        ((size_t*)TmpVector)[2] += 1;                                                                           \
+        ((size_t*)TmpVector)[2] *= 2;                                                                           \
     }                                                                                                           \
     vector_at(vec,vector_size(vec)) = val;                                                                      \
     ((size_t*)vec)[-2] +=1 ;                                                                                    \
@@ -61,11 +60,10 @@
 
 //配列の大きさを変える
 #define vector_resize(vec,siz)do{if(siz>vector_capacity(vec))vector_reserve(vec,siz);((size_t*)vec)[-2] =siz;}while(0)
-
 //メモリを開放する
 #define vector_free(vec) do{void* TmpVector = (void*)&((size_t*)vec)[-3];free(TmpVector);vec=NULL;}while(0)
 
-vector(void) _vector_init(size_t type,size_t size);
+vector(void) vector_init_func(size_t type,size_t size);
 
 //ソートする
 void vector_sort(vector(void) vec,int (*comp)(const void*,const void*));

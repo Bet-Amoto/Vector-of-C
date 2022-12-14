@@ -1,6 +1,7 @@
 #include <stdio.h>
 #include "Vector.h"
 
+#define max(a,b) ((a)>(b)?(a):(b))
 //動的配列の中身を表示する関数
 void PrintIntVector(vector(int) vec){
     printf("[");
@@ -18,7 +19,7 @@ int compareInt(const void* a,const void* b){
 
 int main(){
     //動的配列の初期化
-    vector(int) x = vector_init(int,5);
+    vector(int) x = vector_init(int,0);
     for(int i = 0; i<vector_size(x);i++){
         x[i] = i;
     }
@@ -26,7 +27,7 @@ int main(){
     // [0, 1, 2, 3, 4]
 
     //動的配列に値を追加
-    vector_push_back(x,100);
+    for(int i=0;i<10;i++)vector_push_back(x,i*10);
     vector_insert(x,3,50);
     PrintIntVector(x);
     // [0, 1, 2, 50, 3, 4, 100]
