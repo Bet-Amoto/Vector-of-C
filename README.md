@@ -11,3 +11,7 @@ c++のvectorに寄せて作りました．
 
 [C言語で直感的で使いやすい動的配列を作った話](https://qiita.com/BetAmoto/private/7c46430e81e40bf86e10)
  
+## 更新履歴
+### 2022/12/14
+- _init_vector関数内のmallocでNULLがかえって来た場合の処理を追加
+- Vector.hでassertを使用しないように変更

@@ -40,7 +40,7 @@
     if(vector_capacity(vec) <= vector_size(vec)){                                                       \
         void* TmpVector = (void*)&((size_t*)vec)[-3];                                                   \
         void* NewAddr = realloc(TmpVector,(vector_size(vec)+1)*vector_type(vec) + sizeof(size_t)*3);    \
-        assert(NewAddr!=NULL);                                                                          \
+        if(NewAddr == NULL){printf("Error: Memory allocation failed.(_vector_pudh_back)\n"); exit(1);}  \
         if(TmpVector != NewAddr){TmpVector = NewAddr; vec=(void*)&(((size_t*)TmpVector)[3]);}           \
         ((size_t*)TmpVector)[2] += 1;                                                                   \
     }                                                                                                   \
@@ -53,7 +53,7 @@
     do{                                                                                                 \
         void* TmpVector=(void*)&((size_t*)vec)[-3];                                                     \
         void* NewAddr=realloc(TmpVector,siz*vector_type(vec)+sizeof(size_t)*3);                         \
-        assert(NewAddr!=NULL);                                                                          \
+        if(NewAddr == NULL){printf("Error: Memory allocation failed.(_vector_reserve)\n"); exit(1);}    \
         if(TmpVector != NewAddr){TmpVector = NewAddr; vec=(void*)&(((size_t*)TmpVector)[3]);}           \
         ((size_t*)TmpVector)[2] = siz;                                                                  \
         ((size_t*)TmpVector)[1] = min(vector_size(vec),vector_capacity(vec));                           \
