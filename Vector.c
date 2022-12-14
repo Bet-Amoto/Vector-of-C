@@ -2,6 +2,10 @@
 //値の入れ替え
 static void swap(void* a,void* b,size_t siz){
     void* TmpAddr = malloc(siz);
+    if(TmpAddr == NULL){
+        printf("Error: Memory allocation failed.(vector.c swap)\n");
+        exit(1);
+    }
     memcpy(TmpAddr,a,siz);
     memcpy(a,b,siz);
     memcpy(b,TmpAddr,siz);
@@ -11,7 +15,7 @@ static void swap(void* a,void* b,size_t siz){
 vector(void) _vector_init(size_t type,size_t size){
     vector(void) TmpVector = malloc(type*size + sizeof(size_t)*3);
     if(TmpVector == NULL){
-        printf("Error: Memory allocation failed.(_vector_init)\n");
+        printf("Error: Memory allocation failed.(vector.c _vector_init)\n");
         exit(1);
     }
     ((size_t*)TmpVector)[0] = type;

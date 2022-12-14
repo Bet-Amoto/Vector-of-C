@@ -36,27 +36,27 @@
 #define vector_insert(vec,pos,val) do{vector_push_back(vec,vector_back(vec));for(int i=vector_size(vec)-1;i>=pos;i--)vec[i]=vec[i-1];vec[pos]=val;}while(0)
 
 //配列の末尾に要素を追加する
-#define vector_push_back(vec,val) do{                                                                   \
-    if(vector_capacity(vec) <= vector_size(vec)){                                                       \
-        void* TmpVector = (void*)&((size_t*)vec)[-3];                                                   \
-        void* NewAddr = realloc(TmpVector,(vector_size(vec)+1)*vector_type(vec) + sizeof(size_t)*3);    \
-        if(NewAddr == NULL){printf("Error: Memory allocation failed.(_vector_pudh_back)\n"); exit(1);}  \
-        if(TmpVector != NewAddr){TmpVector = NewAddr; vec=(void*)&(((size_t*)TmpVector)[3]);}           \
-        ((size_t*)TmpVector)[2] += 1;                                                                   \
-    }                                                                                                   \
-    vector_at(vec,vector_size(vec)) = val;                                                              \
-    ((size_t*)vec)[-2] +=1 ;                                                                            \
+#define vector_push_back(vec,val) do{                                                                           \
+    if(vector_capacity(vec) <= vector_size(vec)){                                                               \
+        void* TmpVector = (void*)&((size_t*)vec)[-3];                                                           \
+        void* NewAddr = realloc(TmpVector,(vector_size(vec)+1)*vector_type(vec) + sizeof(size_t)*3);            \
+        if(NewAddr == NULL){printf("Error: Memory allocation failed.(vector.h vector_pudh_back)\n"); exit(1);}  \
+        if(TmpVector != NewAddr){TmpVector = NewAddr; vec=(void*)&(((size_t*)TmpVector)[3]);}                   \
+        ((size_t*)TmpVector)[2] += 1;                                                                           \
+    }                                                                                                           \
+    vector_at(vec,vector_size(vec)) = val;                                                                      \
+    ((size_t*)vec)[-2] +=1 ;                                                                                    \
 }while(0)
 
 //CAPASITYの大きさを変える
-#define vector_reserve(vec,siz)                                                                         \
-    do{                                                                                                 \
-        void* TmpVector=(void*)&((size_t*)vec)[-3];                                                     \
-        void* NewAddr=realloc(TmpVector,siz*vector_type(vec)+sizeof(size_t)*3);                         \
-        if(NewAddr == NULL){printf("Error: Memory allocation failed.(_vector_reserve)\n"); exit(1);}    \
-        if(TmpVector != NewAddr){TmpVector = NewAddr; vec=(void*)&(((size_t*)TmpVector)[3]);}           \
-        ((size_t*)TmpVector)[2] = siz;                                                                  \
-        ((size_t*)TmpVector)[1] = min(vector_size(vec),vector_capacity(vec));                           \
+#define vector_reserve(vec,siz)                                                                                 \
+    do{                                                                                                         \
+        void* TmpVector=(void*)&((size_t*)vec)[-3];                                                             \
+        void* NewAddr=realloc(TmpVector,siz*vector_type(vec)+sizeof(size_t)*3);                                 \
+        if(NewAddr == NULL){printf("Error: Memory allocation failed.(vector.h vector_reserve)\n"); exit(1);}    \
+        if(TmpVector != NewAddr){TmpVector = NewAddr; vec=(void*)&(((size_t*)TmpVector)[3]);}                   \
+        ((size_t*)TmpVector)[2] = siz;                                                                          \
+        ((size_t*)TmpVector)[1] = min(vector_size(vec),vector_capacity(vec));                                   \
     }while(0)
 
 //配列の大きさを変える
