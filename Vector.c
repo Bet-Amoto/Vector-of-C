@@ -20,9 +20,6 @@ vector(void) vector_init_func(size_t type,size_t size){
     }
     ((size_t*)TmpVector)[0] = type;
     ((size_t*)TmpVector)[1] = size;
-    ((size_t*)TmpVector)[2] = 0;
-    ((size_t*)TmpVector)[0] = type;
-    ((size_t*)TmpVector)[1] = size;
     ((size_t*)TmpVector)[2] = size;
     return (void*)&(((size_t*)TmpVector)[3]);
     
